@@ -14,13 +14,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Menu
+ * Producto
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T01:06:32.009Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T03:17:15.009Z")
 
 
-public class Menu   {
+public class Producto   {
   @JsonProperty("id")
   private Long id = null;
 
@@ -31,7 +31,7 @@ public class Menu   {
    * Gets or Sets categoria
    */
   public enum CategoriaEnum {
-    CAFES("Cafes"),
+    CAFE("Cafe"),
     
     BEBIDAS("Bebidas"),
     
@@ -104,7 +104,7 @@ public class Menu   {
   @JsonProperty("disponibilidad")
   private DisponibilidadEnum disponibilidad = null;
 
-  public Menu id(Long id) {
+  public Producto id(Long id) {
     this.id = id;
     return this;
   }
@@ -124,7 +124,7 @@ public class Menu   {
     this.id = id;
   }
 
-  public Menu nombre(String nombre) {
+  public Producto nombre(String nombre) {
     this.nombre = nombre;
     return this;
   }
@@ -144,7 +144,7 @@ public class Menu   {
     this.nombre = nombre;
   }
 
-  public Menu categoria(CategoriaEnum categoria) {
+  public Producto categoria(CategoriaEnum categoria) {
     this.categoria = categoria;
     return this;
   }
@@ -164,7 +164,7 @@ public class Menu   {
     this.categoria = categoria;
   }
 
-  public Menu precio(BigDecimal precio) {
+  public Producto precio(BigDecimal precio) {
     this.precio = precio;
     return this;
   }
@@ -185,12 +185,12 @@ public class Menu   {
     this.precio = precio;
   }
 
-  public Menu photoUrls(List<String> photoUrls) {
+  public Producto photoUrls(List<String> photoUrls) {
     this.photoUrls = photoUrls;
     return this;
   }
 
-  public Menu addPhotoUrlsItem(String photoUrlsItem) {
+  public Producto addPhotoUrlsItem(String photoUrlsItem) {
     this.photoUrls.add(photoUrlsItem);
     return this;
   }
@@ -211,7 +211,7 @@ public class Menu   {
     this.photoUrls = photoUrls;
   }
 
-  public Menu disponibilidad(DisponibilidadEnum disponibilidad) {
+  public Producto disponibilidad(DisponibilidadEnum disponibilidad) {
     this.disponibilidad = disponibilidad;
     return this;
   }
@@ -240,13 +240,13 @@ public class Menu   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Menu menu = (Menu) o;
-    return Objects.equals(this.id, menu.id) &&
-        Objects.equals(this.nombre, menu.nombre) &&
-        Objects.equals(this.categoria, menu.categoria) &&
-        Objects.equals(this.precio, menu.precio) &&
-        Objects.equals(this.photoUrls, menu.photoUrls) &&
-        Objects.equals(this.disponibilidad, menu.disponibilidad);
+    Producto producto = (Producto) o;
+    return Objects.equals(this.id, producto.id) &&
+        Objects.equals(this.nombre, producto.nombre) &&
+        Objects.equals(this.categoria, producto.categoria) &&
+        Objects.equals(this.precio, producto.precio) &&
+        Objects.equals(this.photoUrls, producto.photoUrls) &&
+        Objects.equals(this.disponibilidad, producto.disponibilidad);
   }
 
   @Override
@@ -257,7 +257,7 @@ public class Menu   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Menu {\n");
+    sb.append("class Producto {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    nombre: ").append(toIndentedString(nombre)).append("\n");

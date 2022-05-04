@@ -5,20 +5,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.model.Pedido;
 import java.math.BigDecimal;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * pago por un pedido
+ * generar pago del pedido 
  */
-@ApiModel(description = "pago por un pedido")
+@ApiModel(description = "generar pago del pedido ")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T01:06:32.009Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T03:17:15.009Z")
 
 
 public class Pago   {
+  @JsonProperty("id")
+  private String id = null;
+
+  @JsonProperty("Pedido")
+  private Pedido pedido = null;
+
   @JsonProperty("nomCliente")
   private String nomCliente = null;
 
@@ -30,6 +37,47 @@ public class Pago   {
 
   @JsonProperty("costo")
   private BigDecimal costo = null;
+
+  public Pago id(String id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Pago pedido(Pedido pedido) {
+    this.pedido = pedido;
+    return this;
+  }
+
+  /**
+   * Get pedido
+   * @return pedido
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public Pedido getPedido() {
+    return pedido;
+  }
+
+  public void setPedido(Pedido pedido) {
+    this.pedido = pedido;
+  }
 
   public Pago nomCliente(String nomCliente) {
     this.nomCliente = nomCliente;
@@ -124,7 +172,9 @@ public class Pago   {
       return false;
     }
     Pago pago = (Pago) o;
-    return Objects.equals(this.nomCliente, pago.nomCliente) &&
+    return Objects.equals(this.id, pago.id) &&
+        Objects.equals(this.pedido, pago.pedido) &&
+        Objects.equals(this.nomCliente, pago.nomCliente) &&
         Objects.equals(this.cardNum, pago.cardNum) &&
         Objects.equals(this.expires, pago.expires) &&
         Objects.equals(this.costo, pago.costo);
@@ -132,7 +182,7 @@ public class Pago   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(nomCliente, cardNum, expires, costo);
+    return Objects.hash(id, pedido, nomCliente, cardNum, expires, costo);
   }
 
   @Override
@@ -140,6 +190,8 @@ public class Pago   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Pago {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    pedido: ").append(toIndentedString(pedido)).append("\n");
     sb.append("    nomCliente: ").append(toIndentedString(nomCliente)).append("\n");
     sb.append("    cardNum: ").append(toIndentedString(cardNum)).append("\n");
     sb.append("    expires: ").append(toIndentedString(expires)).append("\n");

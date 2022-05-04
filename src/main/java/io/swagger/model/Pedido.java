@@ -3,9 +3,11 @@ package io.swagger.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.PedidoBase;
+import io.swagger.model.Producto;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;
@@ -13,68 +15,173 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Pedido realizado.
+ * pedido.
  */
-@ApiModel(description = "Pedido realizado.")
+@ApiModel(description = "pedido.")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T01:06:32.009Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T03:17:15.009Z")
 
 
 public class Pedido   {
-  @JsonProperty("pedidoBase")
-  private PedidoBase pedidoBase = null;
+  @JsonProperty("id")
+  private String id = null;
 
-  @JsonProperty("links")
+  @JsonProperty("productos")
   @Valid
-  private List<Object> links = null;
+  private List<Producto> productos = null;
 
-  public Pedido pedidoBase(PedidoBase pedidoBase) {
-    this.pedidoBase = pedidoBase;
-    return this;
-  }
+  @JsonProperty("costoTotal")
+  private BigDecimal costoTotal = null;
 
   /**
-   * Get pedidoBase
-   * @return pedidoBase
-  **/
-  @ApiModelProperty(value = "")
+   * Gets or Sets estado
+   */
+  public enum EstadoEnum {
+    CREADO("Creado"),
+    
+    PAGADO("Pagado"),
+    
+    CANCELADO("Cancelado"),
+    
+    COMPLETADO("Completado");
 
-  @Valid
+    private String value;
 
-  public PedidoBase getPedidoBase() {
-    return pedidoBase;
-  }
-
-  public void setPedidoBase(PedidoBase pedidoBase) {
-    this.pedidoBase = pedidoBase;
-  }
-
-  public Pedido links(List<Object> links) {
-    this.links = links;
-    return this;
-  }
-
-  public Pedido addLinksItem(Object linksItem) {
-    if (this.links == null) {
-      this.links = new ArrayList<Object>();
+    EstadoEnum(String value) {
+      this.value = value;
     }
-    this.links.add(linksItem);
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static EstadoEnum fromValue(String text) {
+      for (EstadoEnum b : EstadoEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+  }
+
+  @JsonProperty("estado")
+  private EstadoEnum estado = null;
+
+  @JsonProperty("fecha")
+  private String fecha = null;
+
+  public Pedido id(String id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get links
-   * @return links
+   * Get id
+   * @return id
   **/
   @ApiModelProperty(value = "")
 
 
-  public List<Object> getLinks() {
-    return links;
+  public String getId() {
+    return id;
   }
 
-  public void setLinks(List<Object> links) {
-    this.links = links;
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Pedido productos(List<Producto> productos) {
+    this.productos = productos;
+    return this;
+  }
+
+  public Pedido addProductosItem(Producto productosItem) {
+    if (this.productos == null) {
+      this.productos = new ArrayList<Producto>();
+    }
+    this.productos.add(productosItem);
+    return this;
+  }
+
+  /**
+   * Get productos
+   * @return productos
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public List<Producto> getProductos() {
+    return productos;
+  }
+
+  public void setProductos(List<Producto> productos) {
+    this.productos = productos;
+  }
+
+  public Pedido costoTotal(BigDecimal costoTotal) {
+    this.costoTotal = costoTotal;
+    return this;
+  }
+
+  /**
+   * Costo total del pedido
+   * @return costoTotal
+  **/
+  @ApiModelProperty(value = "Costo total del pedido")
+
+  @Valid
+
+  public BigDecimal getCostoTotal() {
+    return costoTotal;
+  }
+
+  public void setCostoTotal(BigDecimal costoTotal) {
+    this.costoTotal = costoTotal;
+  }
+
+  public Pedido estado(EstadoEnum estado) {
+    this.estado = estado;
+    return this;
+  }
+
+  /**
+   * Get estado
+   * @return estado
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public EstadoEnum getEstado() {
+    return estado;
+  }
+
+  public void setEstado(EstadoEnum estado) {
+    this.estado = estado;
+  }
+
+  public Pedido fecha(String fecha) {
+    this.fecha = fecha;
+    return this;
+  }
+
+  /**
+   * Get fecha
+   * @return fecha
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getFecha() {
+    return fecha;
+  }
+
+  public void setFecha(String fecha) {
+    this.fecha = fecha;
   }
 
 
@@ -87,13 +194,16 @@ public class Pedido   {
       return false;
     }
     Pedido pedido = (Pedido) o;
-    return Objects.equals(this.pedidoBase, pedido.pedidoBase) &&
-        Objects.equals(this.links, pedido.links);
+    return Objects.equals(this.id, pedido.id) &&
+        Objects.equals(this.productos, pedido.productos) &&
+        Objects.equals(this.costoTotal, pedido.costoTotal) &&
+        Objects.equals(this.estado, pedido.estado) &&
+        Objects.equals(this.fecha, pedido.fecha);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(pedidoBase, links);
+    return Objects.hash(id, productos, costoTotal, estado, fecha);
   }
 
   @Override
@@ -101,8 +211,11 @@ public class Pedido   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Pedido {\n");
     
-    sb.append("    pedidoBase: ").append(toIndentedString(pedidoBase)).append("\n");
-    sb.append("    links: ").append(toIndentedString(links)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    productos: ").append(toIndentedString(productos)).append("\n");
+    sb.append("    costoTotal: ").append(toIndentedString(costoTotal)).append("\n");
+    sb.append("    estado: ").append(toIndentedString(estado)).append("\n");
+    sb.append("    fecha: ").append(toIndentedString(fecha)).append("\n");
     sb.append("}");
     return sb.toString();
   }
