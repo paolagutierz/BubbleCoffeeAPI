@@ -3,23 +3,23 @@ package io.swagger.repository.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class ProductoEntity {
-    
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @Column(name="nombre")
+
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name="categoria")
+    @Column(name = "categoria")
     private String categoria;
 
-    @Column(name="precio")
+    @Column(name = "precio")
     private Double precio;
 
-    @Column(name="disponibilidad")
+    @Column(name = "disponibilidad")
     private String disponibilidad;
 
     public Integer getId() {
