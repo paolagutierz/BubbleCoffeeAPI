@@ -1,7 +1,6 @@
 package io.swagger.api;
 
 import io.swagger.model.Producto;
-import org.springframework.core.io.Resource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T03:17:15.009Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 @Controller
 public class ProductoApiController implements ProductoApi {
@@ -38,7 +37,35 @@ public class ProductoApiController implements ProductoApi {
         this.request = request;
     }
 
-    public ResponseEntity<Producto> createProductWithForm(@ApiParam(value = "  Introduce el nombre del producto") @RequestParam(value="Nombre", required=false)  String nombre,@ApiParam(value = "Elige la categoria del producto", allowableValues="Cafes, Bebidas, Panaderia") @RequestParam(value="Categoria", required=false)  List<String> categoria,@ApiParam(value = "Introduce la descripcion del producto") @RequestParam(value="Descripcion", required=false)  String descripcion,@ApiParam(value = "Introduce el  precio del producto") @RequestParam(value="Precio", required=false)  String precio,@ApiParam(value = "Imagen del producto") @Valid @RequestPart(value="Imagen", required=false) MultipartFile Imagen) {
+    public ResponseEntity<List<Producto>> createProduct(@ApiParam(value = "Crear nuevo producto"  )  @Valid @RequestBody Producto productoItem) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            try {
+                return new ResponseEntity<List<Producto>>(objectMapper.readValue("{}", List.class), HttpStatus.NOT_IMPLEMENTED);
+            } catch (IOException e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<List<Producto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<List<Producto>>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<List<Producto>> findProductByCategory(@NotNull @ApiParam(value = "Ver productos por categoria", required = true, allowableValues = "cafes, bebidas, panaderia") @Valid @RequestParam(value = "category", required = true) List<String> category) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            try {
+                return new ResponseEntity<List<Producto>>(objectMapper.readValue("{}", List.class), HttpStatus.NOT_IMPLEMENTED);
+            } catch (IOException e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<List<Producto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<List<Producto>>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<Producto> getProducts() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -52,12 +79,7 @@ public class ProductoApiController implements ProductoApi {
         return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> deleteProduct(@ApiParam(value = "ID del producto a eliminar",required=true) @PathVariable("productId") Long productId) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<Producto> getProductById(@ApiParam(value = "Introduce el ID del producto",required=true) @PathVariable("productId") Long productId) {
+    public ResponseEntity<Producto> productById(@ApiParam(value = "Introduce el ID del producto",required=true) @PathVariable("productId") String productId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
@@ -71,9 +93,32 @@ public class ProductoApiController implements ProductoApi {
         return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateProductWithForm(@ApiParam(value = "Introduce el ID del producto a actualizar",required=true) @PathVariable("productId") Long productId,@ApiParam(value = "Modificar nombre del producto") @RequestParam(value="Nombre", required=false)  String nombre,@ApiParam(value = "Modificar descripcion del producto") @RequestParam(value="Descripcion", required=false)  String descripcion,@ApiParam(value = "Modificar disponibilidad del producto") @RequestParam(value="Disponibilidad", required=false)  String disponibilidad,@ApiParam(value = "Modificar precio del producto") @RequestParam(value="Precio", required=false)  String precio,@ApiParam(value = "Modificar imagen del producto") @Valid @RequestPart(value="Imagen", required=false) MultipartFile Imagen) {
+    public ResponseEntity<Producto> productoProductIdDelete(@ApiParam(value = "eliminar producto",required=true) @PathVariable("productId") String productId) {
         String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        if (accept != null && accept.contains("application/json")) {
+            try {
+                return new ResponseEntity<Producto>(objectMapper.readValue("{\"empty\": false}", Producto.class), HttpStatus.NOT_IMPLEMENTED);
+            } catch (IOException e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    public ResponseEntity<Producto> productoProductIdPut(@ApiParam(value = "cambiar o actualizar producto por id",required=true) @PathVariable("productId") String productId,@ApiParam(value = "producto a actualizar"  )  @Valid @RequestBody Producto producto) {
+        String accept = request.getHeader("Accept");
+        if (accept != null && accept.contains("application/json")) {
+            try {
+                return new ResponseEntity<Producto>(objectMapper.readValue("{\"empty\": false}", Producto.class), HttpStatus.NOT_IMPLEMENTED);
+            } catch (IOException e) {
+                log.error("Couldn't serialize response for content type application/json", e);
+                return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

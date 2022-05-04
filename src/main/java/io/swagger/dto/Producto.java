@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,7 +15,7 @@ import javax.validation.constraints.*;
  * Producto
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T03:17:15.009Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 
 public class Producto   {
@@ -65,10 +63,6 @@ public class Producto   {
 
   @JsonProperty("precio")
   private BigDecimal precio = null;
-
-  @JsonProperty("photoUrls")
-  @Valid
-  private List<String> photoUrls = new ArrayList<String>();
 
   /**
    * Disponibilidad de productos
@@ -185,32 +179,6 @@ public class Producto   {
     this.precio = precio;
   }
 
-  public Producto photoUrls(List<String> photoUrls) {
-    this.photoUrls = photoUrls;
-    return this;
-  }
-
-  public Producto addPhotoUrlsItem(String photoUrlsItem) {
-    this.photoUrls.add(photoUrlsItem);
-    return this;
-  }
-
-  /**
-   * Get photoUrls
-   * @return photoUrls
-  **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-
-  public List<String> getPhotoUrls() {
-    return photoUrls;
-  }
-
-  public void setPhotoUrls(List<String> photoUrls) {
-    this.photoUrls = photoUrls;
-  }
-
   public Producto disponibilidad(DisponibilidadEnum disponibilidad) {
     this.disponibilidad = disponibilidad;
     return this;
@@ -245,13 +213,12 @@ public class Producto   {
         Objects.equals(this.nombre, producto.nombre) &&
         Objects.equals(this.categoria, producto.categoria) &&
         Objects.equals(this.precio, producto.precio) &&
-        Objects.equals(this.photoUrls, producto.photoUrls) &&
         Objects.equals(this.disponibilidad, producto.disponibilidad);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nombre, categoria, precio, photoUrls, disponibilidad);
+    return Objects.hash(id, nombre, categoria, precio, disponibilidad);
   }
 
   @Override
@@ -263,7 +230,6 @@ public class Producto   {
     sb.append("    nombre: ").append(toIndentedString(nombre)).append("\n");
     sb.append("    categoria: ").append(toIndentedString(categoria)).append("\n");
     sb.append("    precio: ").append(toIndentedString(precio)).append("\n");
-    sb.append("    photoUrls: ").append(toIndentedString(photoUrls)).append("\n");
     sb.append("    disponibilidad: ").append(toIndentedString(disponibilidad)).append("\n");
     sb.append("}");
     return sb.toString();

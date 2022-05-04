@@ -22,26 +22,14 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T03:17:15.009Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 @Validated
 @Api(value = "pedido", description = "the pedido API")
 @RequestMapping(value = "/v2")
 public interface PedidoApi {
 
-    @ApiOperation(value = "", nickname = "pedidoCompletadoPedidoIdPut", notes = "pedido completado", response = Pedido.class, tags={ "Pedido", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "pedido completado", response = Pedido.class),
-        @ApiResponse(code = 400, message = "entrada no valida"),
-        @ApiResponse(code = 404, message = "pedido no encontrado") })
-    @RequestMapping(value = "/pedido/completado/{pedidoId}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Pedido> pedidoCompletadoPedidoIdPut(@ApiParam(value = "pedido id",required=true) @PathVariable("pedidoId") String pedidoId);
-
-
-    @ApiOperation(value = "", nickname = "pedidoDetallePedidoIdGet", notes = "detalle de pedido pagado.", response = Pedido.class, tags={ "Pedido", })
+    @ApiOperation(value = "Obtener detalle del pedido pagado para prepararlo y llevar registro", nickname = "pedidoDetallePedidoIdGet", notes = "detalle de pedido pagado.", response = Pedido.class, tags={ "Pedido", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "pedido encontrado", response = Pedido.class),
         @ApiResponse(code = 400, message = "entrada incorrecta"),
@@ -52,7 +40,19 @@ public interface PedidoApi {
     ResponseEntity<Pedido> pedidoDetallePedidoIdGet(@ApiParam(value = "ver detalle de pedido para producirlo",required=true) @PathVariable("pedidoId") String pedidoId);
 
 
-    @ApiOperation(value = "", nickname = "pedidoPagoPedidoIdPost", notes = "Pagar pedido", response = Pedido.class, tags={ "Pedido", })
+    @ApiOperation(value = "Modificar estado del pedido para notificar al mesero o cliente", nickname = "pedidoEstadoPedidoIdPut", notes = "pedido completado", response = Pedido.class, tags={ "Pedido", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "pedido completado", response = Pedido.class),
+        @ApiResponse(code = 400, message = "entrada no valida"),
+        @ApiResponse(code = 404, message = "pedido no encontrado") })
+    @RequestMapping(value = "/pedido/estado/{pedidoId}",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.PUT)
+    ResponseEntity<Pedido> pedidoEstadoPedidoIdPut(@ApiParam(value = "pedido id",required=true) @PathVariable("pedidoId") String pedidoId);
+
+
+    @ApiOperation(value = "Pagar pedido", nickname = "pedidoPagoPedidoIdPost", notes = "obtener el pedido por Id para pagarlo", response = Pedido.class, tags={ "Pedido", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Pedido pagado", response = Pedido.class),
         @ApiResponse(code = 400, message = "entrada no valida"),
@@ -64,7 +64,7 @@ public interface PedidoApi {
     ResponseEntity<Pedido> pedidoPagoPedidoIdPost(@ApiParam(value = "pedido id",required=true) @PathVariable("pedidoId") String pedidoId,@ApiParam(value = "pagar pedido"  )  @Valid @RequestBody Pago pago);
 
 
-    @ApiOperation(value = "", nickname = "pedidoPedidoIdDelete", notes = "Cancelar pedido", response = Pedido.class, tags={ "Pedido", })
+    @ApiOperation(value = "Cancelar pedido", nickname = "pedidoPedidoIdDelete", notes = "Cancelar pedido", response = Pedido.class, tags={ "Pedido", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "pedido cancelado", response = Pedido.class),
         @ApiResponse(code = 404, message = "no encontrado") })
@@ -75,7 +75,7 @@ public interface PedidoApi {
     ResponseEntity<Pedido> pedidoPedidoIdDelete(@ApiParam(value = "pedido id",required=true) @PathVariable("pedidoId") String pedidoId);
 
 
-    @ApiOperation(value = "", nickname = "pedidoPedidoIdGet", notes = "Obetener pedido por ID", response = Pedido.class, tags={ "Pedido", })
+    @ApiOperation(value = "Bscar pedido por ID", nickname = "pedidoPedidoIdGet", notes = "Obtener pedido por ID", response = Pedido.class, tags={ "Pedido", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "ver pedido", response = Pedido.class),
         @ApiResponse(code = 400, message = "id incorrecto"),
@@ -83,10 +83,10 @@ public interface PedidoApi {
     @RequestMapping(value = "/pedido/{pedidoId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Pedido> pedidoPedidoIdGet(@ApiParam(value = "pedido id",required=true) @PathVariable("pedidoId") String pedidoId);
+    ResponseEntity<Pedido> pedidoPedidoIdGet(@ApiParam(value = "buscar pedido por id",required=true) @PathVariable("pedidoId") String pedidoId);
 
 
-    @ApiOperation(value = "", nickname = "pedidoPedidoIdPut", notes = "Actualizar pedido", response = Pedido.class, tags={ "Pedido", })
+    @ApiOperation(value = "Modificar pedido", nickname = "pedidoPedidoIdPut", notes = "Actualizar pedido", response = Pedido.class, tags={ "Pedido", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "Pedido actualizado", response = Pedido.class),
         @ApiResponse(code = 404, message = "Not Found"),

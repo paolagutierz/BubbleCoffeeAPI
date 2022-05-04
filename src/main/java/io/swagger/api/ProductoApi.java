@@ -6,7 +6,6 @@
 package io.swagger.api;
 
 import io.swagger.model.Producto;
-import org.springframework.core.io.Resource;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,35 +21,46 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T03:17:15.009Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 @Validated
 @Api(value = "producto", description = "the producto API")
 @RequestMapping(value = "/v2")
 public interface ProductoApi {
 
-    @ApiOperation(value = "Agregar nuevo producto al Menu", nickname = "createProductWithForm", notes = "Añadir producto al menu por medio de formulario", response = Producto.class, tags={ "Producto", })
+    @ApiOperation(value = "Agregar nuevo producto al Menu", nickname = "createProduct", notes = "Añadir producto al menu por medio de formulario", response = Producto.class, responseContainer = "List", tags={ "Producto", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class),
+        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class, responseContainer = "List"),
         @ApiResponse(code = 405, message = "Entrada no valida") })
     @RequestMapping(value = "/producto",
         produces = { "application/json" }, 
-        consumes = { "multipart/form-data" },
+        consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Producto> createProductWithForm(@ApiParam(value = "  Introduce el nombre del producto") @RequestParam(value="Nombre", required=false)  String nombre,@ApiParam(value = "Elige la categoria del producto", allowableValues="Cafes, Bebidas, Panaderia") @RequestParam(value="Categoria", required=false)  List<String> categoria,@ApiParam(value = "Introduce la descripcion del producto") @RequestParam(value="Descripcion", required=false)  String descripcion,@ApiParam(value = "Introduce el  precio del producto") @RequestParam(value="Precio", required=false)  String precio,@ApiParam(value = "Imagen del producto") @Valid @RequestPart(value="Imagen", required=false) MultipartFile Imagen);
+    ResponseEntity<List<Producto>> createProduct(@ApiParam(value = "Crear nuevo producto"  )  @Valid @RequestBody Producto productoItem);
 
 
-    @ApiOperation(value = "Eliminar producto del menu", nickname = "deleteProduct", notes = "Eliminar producto del menu por ID", tags={ "Producto", })
+    @ApiOperation(value = "Buscar productos por categoria", nickname = "findProductByCategory", notes = "Se puede agregar categoria separando los string con comas", response = Producto.class, responseContainer = "List", tags={ "Producto", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 400, message = "ID no valido"),
-        @ApiResponse(code = 404, message = "Producto no encontrado") })
-    @RequestMapping(value = "/producto/{productId}",
+        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class, responseContainer = "List"),
+        @ApiResponse(code = 400, message = "no valido") })
+    @RequestMapping(value = "/producto/findByCategory",
         produces = { "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteProduct(@ApiParam(value = "ID del producto a eliminar",required=true) @PathVariable("productId") Long productId);
+        method = RequestMethod.GET)
+    ResponseEntity<List<Producto>> findProductByCategory(@NotNull @ApiParam(value = "Ver productos por categoria", required = true, allowableValues = "cafes, bebidas, panaderia") @Valid @RequestParam(value = "category", required = true) List<String> category);
 
 
-    @ApiOperation(value = "Buscar producto por ID", nickname = "getProductById", notes = "Retorna un solo producto", response = Producto.class, tags={ "Producto", })
+    @ApiOperation(value = "Obtener todos los productos", nickname = "getProducts", notes = "Retorna todos los productos", response = Producto.class, tags={ "Producto", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class),
+        @ApiResponse(code = 400, message = "id no valido"),
+        @ApiResponse(code = 404, message = "producto no encontrado") })
+    @RequestMapping(value = "/producto/all",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<Producto> getProducts();
+
+
+    @ApiOperation(value = "Buscar producto por ID", nickname = "productById", notes = "Retorna un solo producto", response = Producto.class, tags={ "Producto", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class),
         @ApiResponse(code = 400, message = "id no valido"),
@@ -58,16 +68,29 @@ public interface ProductoApi {
     @RequestMapping(value = "/producto/{productId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Producto> getProductById(@ApiParam(value = "Introduce el ID del producto",required=true) @PathVariable("productId") Long productId);
+    ResponseEntity<Producto> productById(@ApiParam(value = "Introduce el ID del producto",required=true) @PathVariable("productId") String productId);
 
 
-    @ApiOperation(value = "Modificar o Actualizar un producto por medio de formulario", nickname = "updateProductWithForm", notes = "Modificar informacion del producto", tags={ "Producto", })
+    @ApiOperation(value = "Eliminar producto del menu", nickname = "productoProductIdDelete", notes = "Eliminar producto del menu", response = Producto.class, tags={ "Producto", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 405, message = "Entrada no valida") })
+        @ApiResponse(code = 200, message = "pedido eliminado", response = Producto.class),
+        @ApiResponse(code = 404, message = "no encontrado") })
     @RequestMapping(value = "/producto/{productId}",
         produces = { "application/json" }, 
-        consumes = { "multipart/form-data" },
+        consumes = { "application/json" },
+        method = RequestMethod.DELETE)
+    ResponseEntity<Producto> productoProductIdDelete(@ApiParam(value = "eliminar producto",required=true) @PathVariable("productId") String productId);
+
+
+    @ApiOperation(value = "cambiar o actualizar producto por ID", nickname = "productoProductIdPut", notes = "Actualizar producto", response = Producto.class, tags={ "Producto", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Producto actualizado", response = Producto.class),
+        @ApiResponse(code = 404, message = "Not Found"),
+        @ApiResponse(code = 405, message = "Metodo no permitido") })
+    @RequestMapping(value = "/producto/{productId}",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> updateProductWithForm(@ApiParam(value = "Introduce el ID del producto a actualizar",required=true) @PathVariable("productId") Long productId,@ApiParam(value = "Modificar nombre del producto") @RequestParam(value="Nombre", required=false)  String nombre,@ApiParam(value = "Modificar descripcion del producto") @RequestParam(value="Descripcion", required=false)  String descripcion,@ApiParam(value = "Modificar disponibilidad del producto") @RequestParam(value="Disponibilidad", required=false)  String disponibilidad,@ApiParam(value = "Modificar precio del producto") @RequestParam(value="Precio", required=false)  String precio,@ApiParam(value = "Modificar imagen del producto") @Valid @RequestPart(value="Imagen", required=false) MultipartFile Imagen);
+    ResponseEntity<Producto> productoProductIdPut(@ApiParam(value = "cambiar o actualizar producto por id",required=true) @PathVariable("productId") String productId,@ApiParam(value = "producto a actualizar"  )  @Valid @RequestBody Producto producto);
 
 }
