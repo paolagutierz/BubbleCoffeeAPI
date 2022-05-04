@@ -1,6 +1,6 @@
 package io.swagger.repository.entity;
 
-import org.hibernate.mapping.List;
+import io.swagger.dto.Pedido;
 
 import javax.persistence.*;
 
@@ -14,7 +14,7 @@ import javax.persistence.*;
         private Integer id;
 
         @Column(name = "pedido")
-        private   pedido;
+        private Pedido pedido;
 
         @Column(name = "nomCliente")
         private String nomCliente;
@@ -28,19 +28,15 @@ import javax.persistence.*;
         @Column(name = "costo")
         private Integer costo;
 
-        public Integer getId() {
-            return id;
-        }
-
         public void setId(Integer id) {
             this.id = id;
         }
 
-        public String getPedido() {
+        public Pedido getPedido() {
             return pedido;
         }
 
-        public void setPedido(String pedido) {
+        public void setPedido(Pedido pedido) {
             this.pedido = pedido;
         }
 
@@ -75,4 +71,10 @@ import javax.persistence.*;
         public void setCosto(Integer costo) {
             this.costo = costo;
         }
+
+        public Integer getId() {
+            return id;
+        }
+
+
     }

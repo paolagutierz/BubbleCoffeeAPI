@@ -1,7 +1,11 @@
 package io.swagger.repository.entity;
 
+import io.swagger.dto.Producto;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
+
 @Entity
 @Table(name = "pedido")
 public class PedidoEntity {
@@ -10,7 +14,7 @@ public class PedidoEntity {
     private Integer id;
 
     @Column(name = "productos")
-    private String  productos;
+    private List<Producto> productos;
 
     @Column(name = "costoTotal")
     private BigDecimal costoTotal;
@@ -29,11 +33,11 @@ public class PedidoEntity {
         this.id = id;
     }
 
-    public String getProductos() {
+    public List<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(String productos) {
+    public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
 
@@ -61,6 +65,9 @@ public class PedidoEntity {
         this.fecha = fecha;
     }
 }
+
+
+
 
 
 

@@ -17,22 +17,22 @@ public class SwaggerDocumentationConfig {
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Bubble Coffee")
-            .description("This is a Coffee Shop API")
-            .license("Apache 2.0")
-            .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-            .termsOfServiceUrl("")
-            .version("2.0.0")
-            .contact(new Contact("","", "paolagutgil-29@hotmail.com"))
-            .build();
+                .title("Bubble Coffee")
+                .description("This is a Coffee Shop API")
+                .license("Apache 2.0")
+                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
+                .termsOfServiceUrl("")
+                .version("2.0.0")
+                .contact(new Contact("", "", "paolagutgil-29@hotmail.com"))
+                .build();
     }
 
     @Bean
-    public Docket customImplementation(){
+    public Docket customImplementation() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                    .apis(RequestHandlerSelectors.basePackage("io.swagger.api"))
-                    .build()
+                .apis(RequestHandlerSelectors.basePackage("io.swagger.api"))
+                .build()
                 .directModelSubstitute(org.threeten.bp.LocalDate.class, java.sql.Date.class)
                 .directModelSubstitute(org.threeten.bp.OffsetDateTime.class, java.util.Date.class)
                 .apiInfo(apiInfo());

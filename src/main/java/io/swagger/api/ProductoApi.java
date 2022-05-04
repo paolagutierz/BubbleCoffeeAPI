@@ -5,22 +5,16 @@
  */
 package io.swagger.api;
 
-import io.swagger.model.Producto;
 import io.swagger.annotations.*;
+import io.swagger.dto.Producto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
+
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 @Validated
@@ -28,69 +22,69 @@ import java.util.List;
 @RequestMapping(value = "/v2")
 public interface ProductoApi {
 
-    @ApiOperation(value = "Agregar nuevo producto al Menu", nickname = "createProduct", notes = "Añadir producto al menu por medio de formulario", response = Producto.class, responseContainer = "List", tags={ "Producto", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class, responseContainer = "List"),
-        @ApiResponse(code = 405, message = "Entrada no valida") })
+    @ApiOperation(value = "Agregar nuevo producto al Menu", nickname = "createProduct", notes = "Añadir producto al menu por medio de formulario", response = Producto.class, responseContainer = "List", tags = {"Producto",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class, responseContainer = "List"),
+            @ApiResponse(code = 405, message = "Entrada no valida")})
     @RequestMapping(value = "/producto",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.POST)
-    ResponseEntity<List<Producto>> createProduct(@ApiParam(value = "Crear nuevo producto"  )  @Valid @RequestBody Producto productoItem);
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.POST)
+    ResponseEntity<List<Producto>> createProduct(@ApiParam(value = "Crear nuevo producto") @Valid @RequestBody Producto productoItem);
 
 
-    @ApiOperation(value = "Buscar productos por categoria", nickname = "findProductByCategory", notes = "Se puede agregar categoria separando los string con comas", response = Producto.class, responseContainer = "List", tags={ "Producto", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class, responseContainer = "List"),
-        @ApiResponse(code = 400, message = "no valido") })
+    @ApiOperation(value = "Buscar productos por categoria", nickname = "findProductByCategory", notes = "Se puede agregar categoria separando los string con comas", response = Producto.class, responseContainer = "List", tags = {"Producto",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class, responseContainer = "List"),
+            @ApiResponse(code = 400, message = "no valido")})
     @RequestMapping(value = "/producto/findByCategory",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+            produces = {"application/json"},
+            method = RequestMethod.GET)
     ResponseEntity<List<Producto>> findProductByCategory(@NotNull @ApiParam(value = "Ver productos por categoria", required = true, allowableValues = "cafes, bebidas, panaderia") @Valid @RequestParam(value = "category", required = true) List<String> category);
 
 
-    @ApiOperation(value = "Obtener todos los productos", nickname = "getProducts", notes = "Retorna todos los productos", response = Producto.class, tags={ "Producto", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class),
-        @ApiResponse(code = 400, message = "id no valido"),
-        @ApiResponse(code = 404, message = "producto no encontrado") })
+    @ApiOperation(value = "Obtener todos los productos", nickname = "getProducts", notes = "Retorna todos los productos", response = Producto.class, tags = {"Producto",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class),
+            @ApiResponse(code = 400, message = "id no valido"),
+            @ApiResponse(code = 404, message = "producto no encontrado")})
     @RequestMapping(value = "/producto/all",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+            produces = {"application/json"},
+            method = RequestMethod.GET)
     ResponseEntity<Producto> getProducts();
 
 
-    @ApiOperation(value = "Buscar producto por ID", nickname = "productById", notes = "Retorna un solo producto", response = Producto.class, tags={ "Producto", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class),
-        @ApiResponse(code = 400, message = "id no valido"),
-        @ApiResponse(code = 404, message = "producto no encontrado") })
+    @ApiOperation(value = "Buscar producto por ID", nickname = "productById", notes = "Retorna un solo producto", response = Producto.class, tags = {"Producto",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "operacion exitosa", response = Producto.class),
+            @ApiResponse(code = 400, message = "id no valido"),
+            @ApiResponse(code = 404, message = "producto no encontrado")})
     @RequestMapping(value = "/producto/{productId}",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Producto> productById(@ApiParam(value = "Introduce el ID del producto",required=true) @PathVariable("productId") String productId);
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<Producto> productById(@ApiParam(value = "Introduce el ID del producto", required = true) @PathVariable("productId") String productId);
 
 
-    @ApiOperation(value = "Eliminar producto del menu", nickname = "productoProductIdDelete", notes = "Eliminar producto del menu", response = Producto.class, tags={ "Producto", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "pedido eliminado", response = Producto.class),
-        @ApiResponse(code = 404, message = "no encontrado") })
+    @ApiOperation(value = "Eliminar producto del menu", nickname = "productoProductIdDelete", notes = "Eliminar producto del menu", response = Producto.class, tags = {"Producto",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "pedido eliminado", response = Producto.class),
+            @ApiResponse(code = 404, message = "no encontrado")})
     @RequestMapping(value = "/producto/{productId}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.DELETE)
-    ResponseEntity<Producto> productoProductIdDelete(@ApiParam(value = "eliminar producto",required=true) @PathVariable("productId") String productId);
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.DELETE)
+    ResponseEntity<Producto> productoProductIdDelete(@ApiParam(value = "eliminar producto", required = true) @PathVariable("productId") String productId);
 
 
-    @ApiOperation(value = "cambiar o actualizar producto por ID", nickname = "productoProductIdPut", notes = "Actualizar producto", response = Producto.class, tags={ "Producto", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Producto actualizado", response = Producto.class),
-        @ApiResponse(code = 404, message = "Not Found"),
-        @ApiResponse(code = 405, message = "Metodo no permitido") })
+    @ApiOperation(value = "cambiar o actualizar producto por ID", nickname = "productoProductIdPut", notes = "Actualizar producto", response = Producto.class, tags = {"Producto",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Producto actualizado", response = Producto.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 405, message = "Metodo no permitido")})
     @RequestMapping(value = "/producto/{productId}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Producto> productoProductIdPut(@ApiParam(value = "cambiar o actualizar producto por id",required=true) @PathVariable("productId") String productId,@ApiParam(value = "producto a actualizar"  )  @Valid @RequestBody Producto producto);
+            produces = {"application/json"},
+            consumes = {"application/json"},
+            method = RequestMethod.PUT)
+    ResponseEntity<Producto> productoProductIdPut(@ApiParam(value = "cambiar o actualizar producto por id", required = true) @PathVariable("productId") String productId, @ApiParam(value = "producto a actualizar") @Valid @RequestBody Producto producto);
 
 }
