@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductMapper mapper;
@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Producto crearProducto(Producto producto) {
-        ProductoEntity entity =  mapper.dtoToEntity(producto);
+        ProductoEntity entity = mapper.dtoToEntity(producto);
         entity = repo.save(entity);
         return mapper.entityToDto(entity);
     }
