@@ -1,10 +1,12 @@
 package io.swagger.configuration;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonTokenId;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.datatype.threetenbp.DateTimeUtils;
 import com.fasterxml.jackson.datatype.threetenbp.DecimalUtils;
 import com.fasterxml.jackson.datatype.threetenbp.deser.ThreeTenDateTimeDeserializerBase;
 import com.fasterxml.jackson.datatype.threetenbp.function.BiFunction;
@@ -23,6 +25,7 @@ import java.math.BigDecimal;
  *
  * @author Nick Williams
  */
+@JsonInclude
 public class CustomInstantDeserializer<T extends Temporal>
         extends ThreeTenDateTimeDeserializerBase<T> {
     private static final long serialVersionUID = 1L;
@@ -142,21 +145,11 @@ public class CustomInstantDeserializer<T extends Temporal>
     }
 
     @Override
-    protected ThreeTenDateTimeDeserializerBase<T> withDateFormat(DateTimeFormatter dtf) {
+    protected JsonDeserializer<T> withDateFormat(DateTimeFormatter dtf) {
         if (dtf == _formatter) {
             return this;
         }
         return new CustomInstantDeserializer<T>(this, dtf);
-    }
-
-    @Override
-    protected ThreeTenDateTimeDeserializerBase<T> withLeniency(Boolean leniency) {
-        return null;
-    }
-
-    @Override
-    protected ThreeTenDateTimeDeserializerBase<T> withShape(JsonFormat.Shape shape) {
-        return null;
     }
 
     @Override
@@ -210,7 +203,7 @@ public class CustomInstantDeserializer<T extends Temporal>
 
     private ZoneId getZone(DeserializationContext context) {
         // Instants are always in UTC, so don't waste compute cycles
-        return (_valueClass == Instant.class) ? null : DateTimeUtils.toZoneId(context.getTimeZone());
+        return (_valueClass == Instant.class) ? null : DateTimeUtils.timeZoneToZoneId(context.getTimeZone());
     }
 
     private static class FromIntegerArguments {
