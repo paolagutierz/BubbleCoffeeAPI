@@ -2,8 +2,8 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
-import io.swagger.dto.Pago;
-import io.swagger.dto.Pedido;
+import io.swagger.dto.PagoDTO;
+import io.swagger.dto.PedidoDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -33,102 +33,102 @@ public class PedidoApiController implements PedidoApi {
         this.request = request;
     }
 
-    public ResponseEntity <Pedido> pedidoDetallePedidoIdGet(@ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId) {
+    public ResponseEntity <PedidoDTO> pedidoDetallePedidoIdGet(@ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Pedido>(objectMapper.readValue("{\"empty\": false}", Pedido.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Pedido>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Pedido>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity <Pedido> pedidoEstadoPedidoIdPut(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId) {
+    public ResponseEntity <PedidoDTO> pedidoEstadoPedidoIdPut(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Pedido>(objectMapper.readValue("{\"empty\": false}", Pedido.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Pedido>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Pedido>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Pedido> pedidoPagoPedidoIdPost(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pagar pedido") @Valid @RequestBody Pago pago) {
+    public ResponseEntity<PedidoDTO> pedidoPagoPedidoIdPost(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pagar pedido") @Valid @RequestBody PagoDTO pagoDTO) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Pedido>(objectMapper.readValue("{\"empty\": false}", Pedido.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Pedido>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Pedido>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Pedido> pedidoPedidoIdDelete(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId) {
+    public ResponseEntity<PedidoDTO> pedidoPedidoIdDelete(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Pedido>(objectMapper.readValue("{\"empty\": false}", Pedido.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Pedido>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Pedido>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Pedido> pedidoPedidoIdGet(@ApiParam(value = "buscar pedido por id", required = true) @PathVariable("pedidoId") String pedidoId) {
+    public ResponseEntity<PedidoDTO> pedidoPedidoIdGet(@ApiParam(value = "buscar pedido por id", required = true) @PathVariable("pedidoId") String pedidoId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Pedido>(objectMapper.readValue("{\"empty\": false}", Pedido.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Pedido>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Pedido>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Pedido> pedidoPedidoIdPut(@ApiParam(value = "cambiar o actualizar pedido por id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pedido a actualizar") @Valid @RequestBody Pedido pedido) {
+    public ResponseEntity<PedidoDTO> pedidoPedidoIdPut(@ApiParam(value = "cambiar o actualizar pedido por id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pedido a actualizar") @Valid @RequestBody PedidoDTO pedidoDTO) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Pedido>(objectMapper.readValue("{\"empty\": false}", Pedido.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Pedido>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Pedido>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Pedido> pedidoPost(@ApiParam(value = "Agregar pedido") @Valid @RequestBody Pedido pedido) {
+    public ResponseEntity<PedidoDTO> pedidoPost(@ApiParam(value = "Agregar pedido") @Valid @RequestBody PedidoDTO pedidoDTO) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<Pedido>(objectMapper.readValue("{\"empty\": false}", Pedido.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Pedido>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<Pedido>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

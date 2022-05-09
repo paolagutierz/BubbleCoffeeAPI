@@ -1,6 +1,6 @@
 package io.swagger.mapper;
 
-import io.swagger.dto.Producto;
+import io.swagger.dto.ProductoDTO;
 import io.swagger.repository.entity.ProductoEntity;
 import org.mapstruct.Mapper;
 
@@ -9,11 +9,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductoEntity dtoToEntity(Producto dto);
+    ProductoEntity dtoToEntity(ProductoDTO dto);
 
-    Producto entityToDto(ProductoEntity entity);
+    ProductoDTO entityToDto(ProductoEntity entity);
 
-    List<Producto> entityListToDtoList(List<ProductoEntity> entityList);
-
-    List<ProductoEntity> dtoListToEntityList(List<Producto> dtoList);
+    List<ProductoDTO> entityListToDtoList(List<ProductoEntity> entityList);
 }

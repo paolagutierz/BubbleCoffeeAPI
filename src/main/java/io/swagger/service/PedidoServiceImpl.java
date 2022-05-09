@@ -1,6 +1,6 @@
 package io.swagger.service;
 
-import io.swagger.dto.Pedido;
+import io.swagger.dto.PedidoDTO;
 import io.swagger.mapper.PedidoMapper;
 import io.swagger.repository.PedidoRepo;
 import io.swagger.repository.entity.PedidoEntity;
@@ -18,8 +18,8 @@ public class PedidoServiceImpl implements PedidoService {
     private PedidoRepo repo;
 
     @Override
-    public Pedido crearPedido(Pedido pedido) {
-        PedidoEntity entity = mapper.dtoToEntity(pedido);
+    public PedidoDTO crearPedido(PedidoDTO pedidoDTO) {
+        PedidoEntity entity = mapper.dtoToEntity(pedidoDTO);
         entity = repo.save(entity);
         return mapper.entityToDto(entity);
     }

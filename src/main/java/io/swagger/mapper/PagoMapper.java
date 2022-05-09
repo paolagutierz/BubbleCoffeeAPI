@@ -1,20 +1,17 @@
 package io.swagger.mapper;
 
-import io.swagger.dto.Pago;
+import io.swagger.dto.PagoDTO;
 import io.swagger.repository.entity.PagoEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
 
+@Mapper(componentModel = "spring")
+public interface PagoMapper {
 
-    @Mapper(componentModel = "spring")
-    public interface PagoMapper {
+    PagoEntity dtoToEntity(PagoDTO dto);
 
-        PagoEntity dtoToEntity(Pago dto);
+    PagoDTO entityToDto(PagoEntity entity);
 
-        Pago entityToDto(PagoEntity entity);
-
-        List<Pago> entityListToDtoList(List<PagoEntity> entityList);
-
-        List<PagoEntity> dtoListToEntityList(List<Pago> dtoList);
+    List<PagoDTO> entityListToDtoList(List<PagoEntity> entityList);
 }

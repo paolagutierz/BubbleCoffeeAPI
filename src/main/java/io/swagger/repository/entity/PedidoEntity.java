@@ -1,9 +1,6 @@
 package io.swagger.repository.entity;
 
-import io.swagger.dto.Producto;
-
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -13,11 +10,11 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "productos")
-    private List<Producto> productos;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ProductoEntity> productos;
 
     @Column(name = "costoTotal")
-    private BigDecimal costoTotal;
+    private double costoTotal;
 
     @Column(name = "estado")
     private String estado;
@@ -33,19 +30,19 @@ public class PedidoEntity {
         this.id = id;
     }
 
-    public List<Producto> getProductos() {
+    public List<ProductoEntity> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setProductos(List<ProductoEntity> productoDTOS) {
+        this.productos = productoDTOS;
     }
 
-    public BigDecimal getCostoTotal() {
+    public double getCostoTotal() {
         return costoTotal;
     }
 
-    public void setCostoTotal(BigDecimal costoTotal) {
+    public void setCostoTotal(double costoTotal) {
         this.costoTotal = costoTotal;
     }
 

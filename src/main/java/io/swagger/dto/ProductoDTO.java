@@ -17,7 +17,7 @@ import java.util.Objects;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 
-public class Producto {
+public class ProductoDTO {
     @JsonProperty("id")
     private Long id = null;
 
@@ -97,7 +97,7 @@ public class Producto {
     @JsonProperty("disponibilidad")
     private DisponibilidadEnum disponibilidad = null;
 
-    public Producto id(Long id) {
+    public ProductoDTO id(Long id) {
         this.id = id;
         return this;
     }
@@ -118,7 +118,7 @@ public class Producto {
         this.id = id;
     }
 
-    public Producto nombre(String nombre) {
+    public ProductoDTO nombre(String nombre) {
         this.nombre = nombre;
         return this;
     }
@@ -139,7 +139,7 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Producto categoria(CategoriaEnum categoria) {
+    public ProductoDTO categoria(CategoriaEnum categoria) {
         this.categoria = categoria;
         return this;
     }
@@ -160,7 +160,7 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public Producto precio(BigDecimal precio) {
+    public ProductoDTO precio(BigDecimal precio) {
         this.precio = precio;
         return this;
     }
@@ -182,7 +182,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Producto disponibilidad(DisponibilidadEnum disponibilidad) {
+    public ProductoDTO disponibilidad(DisponibilidadEnum disponibilidad) {
         this.disponibilidad = disponibilidad;
         return this;
     }
@@ -212,12 +212,12 @@ public class Producto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Producto producto = (Producto) o;
-        return Objects.equals(this.id, producto.id) &&
-                Objects.equals(this.nombre, producto.nombre) &&
-                Objects.equals(this.categoria, producto.categoria) &&
-                Objects.equals(this.precio, producto.precio) &&
-                Objects.equals(this.disponibilidad, producto.disponibilidad);
+        ProductoDTO productoDTO = (ProductoDTO) o;
+        return Objects.equals(this.id, productoDTO.id) &&
+                Objects.equals(this.nombre, productoDTO.nombre) &&
+                Objects.equals(this.categoria, productoDTO.categoria) &&
+                Objects.equals(this.precio, productoDTO.precio) &&
+                Objects.equals(this.disponibilidad, productoDTO.disponibilidad);
     }
 
     @Override

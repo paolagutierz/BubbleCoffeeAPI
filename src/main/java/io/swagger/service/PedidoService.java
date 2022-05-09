@@ -1,8 +1,8 @@
 package io.swagger.service;
 
-import io.swagger.dto.Pedido;
+import io.swagger.dto.PedidoDTO;
 
 public interface PedidoService {
 
-    Pedido crearPedido(Pedido pedido);
+    PedidoDTO crearPedido(PedidoDTO pedidoDTO);
 }

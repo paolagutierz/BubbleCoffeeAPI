@@ -1,7 +1,7 @@
 package io.swagger.service;
 
 
-import io.swagger.dto.Pago;
+import io.swagger.dto.PagoDTO;
 import io.swagger.mapper.PagoMapper;
 import io.swagger.repository.PagoRepo;
 import io.swagger.repository.entity.PagoEntity;
@@ -19,8 +19,8 @@ public class PagoServiceImpl implements PagoService {
     private PagoRepo repo;
 
     @Override
-    public Pago crearPago(Pago pago) {
-        PagoEntity entity = mapper.dtoToEntity(pago);
+    public PagoDTO crearPago(PagoDTO pagoDTO) {
+        PagoEntity entity = mapper.dtoToEntity(pagoDTO);
         entity = repo.save(entity);
         return mapper.entityToDto(entity);
     }

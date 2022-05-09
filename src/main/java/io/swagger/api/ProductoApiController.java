@@ -2,9 +2,11 @@ package io.swagger.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
-import io.swagger.dto.Producto;
+import io.swagger.dto.ProductoDTO;
+import io.swagger.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.io.IOException;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
@@ -23,100 +24,83 @@ import java.util.List;
 @Controller
 public class ProductoApiController implements ProductoApi {
 
+    private ProductService productService;
+
     private static final Logger log = LoggerFactory.getLogger(ProductoApiController.class);
 
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
 
-    @org.springframework.beans.factory.annotation.Autowired
-    public ProductoApiController(ObjectMapper objectMapper, HttpServletRequest request) {
+    @Autowired
+    public ProductoApiController(ObjectMapper objectMapper, HttpServletRequest request, ProductService service) {
         this.objectMapper = objectMapper;
         this.request = request;
+        this.productService = service;
     }
 
-    public ResponseEntity<List<Producto>> createProduct(@ApiParam(value = "Crear nuevo producto") @Valid @RequestBody Producto productoItem) {
+    public ResponseEntity<ProductoDTO> createProduct(@ApiParam(value = "Crear nuevo producto") @Valid @RequestBody ProductoDTO productoItem) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Producto>>(objectMapper.readValue("{}", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Producto>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            //llamar el servicio para realiar la accion y obtener respuesta
+            ProductoDTO nuevoProducto = productService.crearProducto(productoItem);
+            //devolver data con el codigo correspondiente
+            return new ResponseEntity(nuevoProducto, HttpStatus.CREATED);
         }
 
-        return new ResponseEntity<List<Producto>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Producto>> findProductByCategory(@NotNull @ApiParam(value = "Ver productos por categoria", required = true, allowableValues = "cafes, bebidas, panaderia") @Valid @RequestParam(value = "category", required = true) List<String> category) {
+    public ResponseEntity<List<ProductoDTO>> findProductByCategory(@NotNull @ApiParam(value = "Ver productos por categoria", required = true, allowableValues = "cafes, bebidas, panaderia") @Valid @RequestParam(value = "category", required = true) String category) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Producto>>(objectMapper.readValue("{}", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Producto>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            // llamo al servicio y obtengo la lista
+            List<ProductoDTO> productos = productService.obtenerProductosPorCategoria(category);
+
+            return new ResponseEntity(productos, HttpStatus.OK);
         }
 
-        return new ResponseEntity<List<Producto>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Producto> getProducts() {
+    public ResponseEntity<List<ProductoDTO>> getProducts() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Producto>(objectMapper.readValue("{\"empty\": false}", Producto.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+            List<ProductoDTO> productos = productService.obtenerTodosLosProductos();
 
-        return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity(productos, HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Producto> productById(@ApiParam(value = "Introduce el ID del producto", required = true) @PathVariable("productId") String productId) {
+    public ResponseEntity<ProductoDTO> productById(@ApiParam(value = "Introduce el ID del producto", required = true) @PathVariable("productId") String productId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Producto>(objectMapper.readValue("{\"empty\": false}", Producto.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            ProductoDTO producto = productService.obtenerProductoPorId(Integer.parseInt(productId));
+
+            return new ResponseEntity(producto, HttpStatus.OK);
         }
 
-        return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<ProductoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Producto> productoProductIdDelete(@ApiParam(value = "eliminar producto", required = true) @PathVariable("productId") String productId) {
+    public ResponseEntity<ProductoDTO> productoProductIdDelete(@ApiParam(value = "eliminar producto", required = true) @PathVariable("productId") String productId) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Producto>(objectMapper.readValue("{\"empty\": false}", Producto.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
 
-        return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
+        productService.eliminarProducto(Integer.parseInt(productId));
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-    public ResponseEntity<Producto> productoProductIdPut(@ApiParam(value = "cambiar o actualizar producto por id", required = true) @PathVariable("productId") String productId, @ApiParam(value = "producto a actualizar") @Valid @RequestBody Producto producto) {
+    public ResponseEntity<ProductoDTO> productoProductIdPut(@ApiParam(value = "cambiar o actualizar producto por id", required = true) @PathVariable("productId") String productId, @ApiParam(value = "producto a actualizar") @Valid @RequestBody ProductoDTO productoDTO) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Producto>(objectMapper.readValue("{\"empty\": false}", Producto.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            productService.modificarProducto(Integer.parseInt(productId), productoDTO);
+            return new ResponseEntity(HttpStatus.OK);
+
         }
 
-        return new ResponseEntity<Producto>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<ProductoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

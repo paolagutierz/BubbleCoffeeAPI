@@ -1,8 +1,8 @@
 package io.swagger.service;
 
-import io.swagger.dto.Pago;
+import io.swagger.dto.PagoDTO;
 
 public interface PagoService {
 
-    Pago crearPago(Pago pago);
+    PagoDTO crearPago(PagoDTO pagoDTO);
 }

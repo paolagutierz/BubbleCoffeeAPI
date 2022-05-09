@@ -21,13 +21,13 @@ import java.util.Objects;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 
-public class Pedido {
+public class PedidoDTO {
     @JsonProperty("id")
     private String id = null;
 
     @JsonProperty("productos")
     @Valid
-    private List<Producto> productos = null;
+    private List<ProductoDTO> productoDTOS = null;
 
     @JsonProperty("costoTotal")
     private BigDecimal costoTotal = null;
@@ -73,7 +73,7 @@ public class Pedido {
     @JsonProperty("fecha")
     private String fecha = null;
 
-    public Pedido id(String id) {
+    public PedidoDTO id(String id) {
         this.id = id;
         return this;
     }
@@ -94,16 +94,16 @@ public class Pedido {
         this.id = id;
     }
 
-    public Pedido productos(List<Producto> productos) {
-        this.productos = productos;
+    public PedidoDTO productos(List<ProductoDTO> productoDTOS) {
+        this.productoDTOS = productoDTOS;
         return this;
     }
 
-    public Pedido addProductosItem(Producto productosItem) {
-        if (this.productos == null) {
-            this.productos = new ArrayList<Producto>();
+    public PedidoDTO addProductosItem(ProductoDTO productosItem) {
+        if (this.productoDTOS == null) {
+            this.productoDTOS = new ArrayList<ProductoDTO>();
         }
-        this.productos.add(productosItem);
+        this.productoDTOS.add(productosItem);
         return this;
     }
 
@@ -116,15 +116,15 @@ public class Pedido {
 
     @Valid
 
-    public List<Producto> getProductos() {
-        return productos;
+    public List<ProductoDTO> getProductos() {
+        return productoDTOS;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setProductos(List<ProductoDTO> productoDTOS) {
+        this.productoDTOS = productoDTOS;
     }
 
-    public Pedido costoTotal(BigDecimal costoTotal) {
+    public PedidoDTO costoTotal(BigDecimal costoTotal) {
         this.costoTotal = costoTotal;
         return this;
     }
@@ -146,7 +146,7 @@ public class Pedido {
         this.costoTotal = costoTotal;
     }
 
-    public Pedido estado(EstadoEnum estado) {
+    public PedidoDTO estado(EstadoEnum estado) {
         this.estado = estado;
         return this;
     }
@@ -167,7 +167,7 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public Pedido fecha(String fecha) {
+    public PedidoDTO fecha(String fecha) {
         this.fecha = fecha;
         return this;
     }
@@ -197,17 +197,17 @@ public class Pedido {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Pedido pedido = (Pedido) o;
-        return Objects.equals(this.id, pedido.id) &&
-                Objects.equals(this.productos, pedido.productos) &&
-                Objects.equals(this.costoTotal, pedido.costoTotal) &&
-                Objects.equals(this.estado, pedido.estado) &&
-                Objects.equals(this.fecha, pedido.fecha);
+        PedidoDTO pedidoDTO = (PedidoDTO) o;
+        return Objects.equals(this.id, pedidoDTO.id) &&
+                Objects.equals(this.productoDTOS, pedidoDTO.productoDTOS) &&
+                Objects.equals(this.costoTotal, pedidoDTO.costoTotal) &&
+                Objects.equals(this.estado, pedidoDTO.estado) &&
+                Objects.equals(this.fecha, pedidoDTO.fecha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productos, costoTotal, estado, fecha);
+        return Objects.hash(id, productoDTOS, costoTotal, estado, fecha);
     }
 
     @Override
@@ -216,7 +216,7 @@ public class Pedido {
         sb.append("class Pedido {\n");
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    productos: ").append(toIndentedString(productos)).append("\n");
+        sb.append("    productos: ").append(toIndentedString(productoDTOS)).append("\n");
         sb.append("    costoTotal: ").append(toIndentedString(costoTotal)).append("\n");
         sb.append("    estado: ").append(toIndentedString(estado)).append("\n");
         sb.append("    fecha: ").append(toIndentedString(fecha)).append("\n");

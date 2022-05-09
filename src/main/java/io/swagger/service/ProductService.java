@@ -1,10 +1,20 @@
 package io.swagger.service;
 
-import io.swagger.dto.Producto;
+import io.swagger.dto.ProductoDTO;
+
+import java.util.List;
 
 public interface ProductService {
 
-    Producto crearProducto(Producto producto);
+    ProductoDTO crearProducto(ProductoDTO productoDTO);
 
+    void eliminarProducto(int id);
 
+    List<ProductoDTO> obtenerTodosLosProductos();
+
+    ProductoDTO obtenerProductoPorId(int id);
+
+    List<ProductoDTO> obtenerProductosPorCategoria(String categoria);
+
+    ProductoDTO modificarProducto(int id, ProductoDTO productoDTO);
 }

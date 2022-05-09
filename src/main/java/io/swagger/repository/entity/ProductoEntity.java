@@ -17,7 +17,7 @@ public class ProductoEntity {
     private String categoria;
 
     @Column(name = "precio")
-    private Double precio;
+    private double precio;
 
     @Column(name = "disponibilidad")
     private String disponibilidad;
@@ -46,11 +46,11 @@ public class ProductoEntity {
         this.categoria = categoria;
     }
 
-    public Double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 

@@ -18,12 +18,12 @@ import java.util.Objects;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 
-public class Pago {
+public class PagoDTO {
     @JsonProperty("id")
     private String id = null;
 
     @JsonProperty("Pedido")
-    private Pedido pedido = null;
+    private PedidoDTO pedidoDTO = null;
 
     @JsonProperty("nomCliente")
     private String nomCliente = null;
@@ -37,7 +37,7 @@ public class Pago {
     @JsonProperty("costo")
     private BigDecimal costo = null;
 
-    public Pago id(String id) {
+    public PagoDTO id(String id) {
         this.id = id;
         return this;
     }
@@ -58,8 +58,8 @@ public class Pago {
         this.id = id;
     }
 
-    public Pago pedido(Pedido pedido) {
-        this.pedido = pedido;
+    public PagoDTO pedido(PedidoDTO pedidoDTO) {
+        this.pedidoDTO = pedidoDTO;
         return this;
     }
 
@@ -72,15 +72,15 @@ public class Pago {
 
     @Valid
 
-    public Pedido getPedido() {
-        return pedido;
+    public PedidoDTO getPedido() {
+        return pedidoDTO;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setPedido(PedidoDTO pedidoDTO) {
+        this.pedidoDTO = pedidoDTO;
     }
 
-    public Pago nomCliente(String nomCliente) {
+    public PagoDTO nomCliente(String nomCliente) {
         this.nomCliente = nomCliente;
         return this;
     }
@@ -102,7 +102,7 @@ public class Pago {
         this.nomCliente = nomCliente;
     }
 
-    public Pago cardNum(String cardNum) {
+    public PagoDTO cardNum(String cardNum) {
         this.cardNum = cardNum;
         return this;
     }
@@ -124,7 +124,7 @@ public class Pago {
         this.cardNum = cardNum;
     }
 
-    public Pago expires(String expires) {
+    public PagoDTO expires(String expires) {
         this.expires = expires;
         return this;
     }
@@ -145,7 +145,7 @@ public class Pago {
         this.expires = expires;
     }
 
-    public Pago costo(BigDecimal costo) {
+    public PagoDTO costo(BigDecimal costo) {
         this.costo = costo;
         return this;
     }
@@ -176,18 +176,18 @@ public class Pago {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Pago pago = (Pago) o;
-        return Objects.equals(this.id, pago.id) &&
-                Objects.equals(this.pedido, pago.pedido) &&
-                Objects.equals(this.nomCliente, pago.nomCliente) &&
-                Objects.equals(this.cardNum, pago.cardNum) &&
-                Objects.equals(this.expires, pago.expires) &&
-                Objects.equals(this.costo, pago.costo);
+        PagoDTO pagoDTO = (PagoDTO) o;
+        return Objects.equals(this.id, pagoDTO.id) &&
+                Objects.equals(this.pedidoDTO, pagoDTO.pedidoDTO) &&
+                Objects.equals(this.nomCliente, pagoDTO.nomCliente) &&
+                Objects.equals(this.cardNum, pagoDTO.cardNum) &&
+                Objects.equals(this.expires, pagoDTO.expires) &&
+                Objects.equals(this.costo, pagoDTO.costo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, pedido, nomCliente, cardNum, expires, costo);
+        return Objects.hash(id, pedidoDTO, nomCliente, cardNum, expires, costo);
     }
 
     @Override
@@ -196,7 +196,7 @@ public class Pago {
         sb.append("class Pago {\n");
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    pedido: ").append(toIndentedString(pedido)).append("\n");
+        sb.append("    pedido: ").append(toIndentedString(pedidoDTO)).append("\n");
         sb.append("    nomCliente: ").append(toIndentedString(nomCliente)).append("\n");
         sb.append("    cardNum: ").append(toIndentedString(cardNum)).append("\n");
         sb.append("    expires: ").append(toIndentedString(expires)).append("\n");
