@@ -7,7 +7,6 @@ package io.swagger.api;
 
 import io.swagger.annotations.*;
 import io.swagger.dto.PedidoDTO;
-import io.swagger.dto.PagoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,47 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 
 @Validated
 @Api(value = "pedido", description = "the pedido API")
 @RequestMapping(value = "/v2")
+
 public interface PedidoApi {
-
-    @ApiOperation(value = "Obtener detalle del pedido pagado para prepararlo y llevar registro", nickname = "pedidoDetallePedidoIdGet", notes = "detalle de pedido pagado.", response = PedidoDTO.class, tags = {"Pedido",})
+    @ApiOperation(value = "Generar pedido", nickname = "pedidoPost", notes = "Hacer pedido", response = PedidoDTO.class, tags = {"Pedido",})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "pedido encontrado", response = PedidoDTO.class),
-            @ApiResponse(code = 400, message = "entrada incorrecta"),
-            @ApiResponse(code = 404, message = "pedido no encontrado")})
-    @RequestMapping(value = "/pedido/detalle/{pedidoId}",
-            produces = {"application/json"},
-            method = RequestMethod.GET)
-    ResponseEntity<PedidoDTO> pedidoDetallePedidoIdGet(@ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId);
-
-
-    @ApiOperation(value = "Modificar estado del pedido para notificar al mesero o cliente", nickname = "pedidoEstadoPedidoIdPut", notes = "pedido completado", response = PedidoDTO.class, tags = {"Pedido",})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "pedido completado", response = PedidoDTO.class),
+            @ApiResponse(code = 201, message = "pedido created", response = PedidoDTO.class),
             @ApiResponse(code = 400, message = "entrada no valida"),
-            @ApiResponse(code = 404, message = "pedido no encontrado")})
-    @RequestMapping(value = "/pedido/estado/{pedidoId}",
-            produces = {"application/json"},
-            consumes = {"application/json"},
-            method = RequestMethod.PUT)
-    ResponseEntity<PedidoDTO> pedidoEstadoPedidoIdPut(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId);
-
-
-    @ApiOperation(value = "Pagar pedido", nickname = "pedidoPagoPedidoIdPost", notes = "obtener el pedido por Id para pagarlo", response = PedidoDTO.class, tags = {"Pedido",})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Pedido pagado", response = PedidoDTO.class),
-            @ApiResponse(code = 400, message = "entrada no valida"),
-            @ApiResponse(code = 409, message = "pago duplicado")})
-    @RequestMapping(value = "/pedido/pago/{pedidoId}",
+            @ApiResponse(code = 409, message = "ya existe el pedido")})
+    @RequestMapping(value = "/pedido",
             produces = {"application/json"},
             consumes = {"application/json"},
             method = RequestMethod.POST)
-    ResponseEntity<PedidoDTO> pedidoPagoPedidoIdPost(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pagar pedido") @Valid @RequestBody PagoDTO pagoDTO);
+    ResponseEntity<PedidoDTO> pedidoPost(@ApiParam(value = "Agregar pedido") @Valid @RequestBody ArrayList<Integer> productos);
 
 
     @ApiOperation(value = "Cancelar pedido", nickname = "pedidoPedidoIdDelete", notes = "Cancelar pedido", response = PedidoDTO.class, tags = {"Pedido",})
@@ -93,15 +70,26 @@ public interface PedidoApi {
     ResponseEntity<PedidoDTO> pedidoPedidoIdPut(@ApiParam(value = "cambiar o actualizar pedido por id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pedido a actualizar") @Valid @RequestBody PedidoDTO pedidoDTO);
 
 
-    @ApiOperation(value = "Generar pedido", nickname = "pedidoPost", notes = "Hacer pedido", response = PedidoDTO.class, tags = {"Pedido",})
+    @ApiOperation(value = "Obtener detalle del pedido pagado para prepararlo y llevar registro", nickname = "pedidoDetallePedidoIdGet", notes = "detalle de pedido pagado.", response = PedidoDTO.class, tags = {"Pedido",})
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "pedido created", response = PedidoDTO.class),
+            @ApiResponse(code = 200, message = "pedido encontrado", response = PedidoDTO.class),
+            @ApiResponse(code = 400, message = "entrada incorrecta"),
+            @ApiResponse(code = 404, message = "pedido no encontrado")})
+    @RequestMapping(value = "/pedido/detalle/{pedidoId}",
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<PedidoDTO> pedidoDetallePedidoIdGet(@ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId);
+
+
+    @ApiOperation(value = "Modificar estado del pedido para notificar al mesero o cliente", nickname = "pedidoEstadoPedidoIdPut", notes = "pedido completado", response = PedidoDTO.class, tags = {"Pedido",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "pedido completado", response = PedidoDTO.class),
             @ApiResponse(code = 400, message = "entrada no valida"),
-            @ApiResponse(code = 409, message = "ya existe el pedido")})
-    @RequestMapping(value = "/pedido",
+            @ApiResponse(code = 404, message = "pedido no encontrado")})
+    @RequestMapping(value = "/pedido/estado/{pedidoId}",
             produces = {"application/json"},
             consumes = {"application/json"},
-            method = RequestMethod.POST)
-    ResponseEntity<PedidoDTO> pedidoPost(@ApiParam(value = "Agregar pedido") @Valid @RequestBody PedidoDTO pedidoDTO);
+            method = RequestMethod.PUT)
+    ResponseEntity<PedidoDTO> pedidoEstadoPedidoIdPut(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId);
 
 }
