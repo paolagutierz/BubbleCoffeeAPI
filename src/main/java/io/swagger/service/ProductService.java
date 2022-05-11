@@ -14,7 +14,7 @@ public interface ProductService {
 
     ProductoDTO obtenerProductoPorId(int id);
 
-    List<ProductoDTO> obtenerProductosPorCategoria(String categoria);
+    List<ProductoDTO> obtenerProductosPorCategoria(List<String> categorias);
 
     ProductoDTO modificarProducto(int id, ProductoDTO productoDTO);
 }

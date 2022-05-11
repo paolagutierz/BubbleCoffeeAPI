@@ -39,19 +39,21 @@ public class ProductoApiController implements ProductoApi {
         this.productService = service;
     }
 
-    public ResponseEntity<ProductoDTO> createProduct(@ApiParam(value = "Crear nuevo producto") @Valid @RequestBody ProductoDTO productoItem) {
+    public ResponseEntity<ProductoDTO> createProduct(
+            @ApiParam(value = "Crear nuevo producto") @Valid @RequestBody ProductoDTO productoItem) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            //llamar el servicio para realiar la accion y obtener respuesta
+            // llamar el servicio para realiar la accion y obtener respuesta
             ProductoDTO nuevoProducto = productService.crearProducto(productoItem);
-            //devolver data con el codigo correspondiente
+            // devolver data con el codigo correspondiente
             return new ResponseEntity(nuevoProducto, HttpStatus.CREATED);
         }
 
         return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<ProductoDTO>> findProductByCategory(@NotNull @ApiParam(value = "Ver productos por categoria", required = true, allowableValues = "cafes, bebidas, panaderia") @Valid @RequestParam(value = "category", required = true) String category) {
+    public ResponseEntity<List<ProductoDTO>> findProductByCategory(
+            @NotNull @ApiParam(value = "Ver productos por categoria", required = true, allowableValues = "CAFE, BEBIDA, PANADERIA") @Valid @RequestParam(value = "category", required = true) List<String> category) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             // llamo al servicio y obtengo la lista
@@ -63,17 +65,8 @@ public class ProductoApiController implements ProductoApi {
         return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<ProductoDTO>> getProducts() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            List<ProductoDTO> productos = productService.obtenerTodosLosProductos();
-
-            return new ResponseEntity(productos, HttpStatus.OK);
-        }
-        return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    public ResponseEntity<ProductoDTO> productById(@ApiParam(value = "Introduce el ID del producto", required = true) @PathVariable("productId") String productId) {
+    public ResponseEntity<ProductoDTO> productById(
+            @ApiParam(value = "Introduce el ID del producto", required = true) @PathVariable("productId") String productId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             ProductoDTO producto = productService.obtenerProductoPorId(Integer.parseInt(productId));
@@ -84,7 +77,8 @@ public class ProductoApiController implements ProductoApi {
         return new ResponseEntity<ProductoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<ProductoDTO> productoProductIdDelete(@ApiParam(value = "eliminar producto", required = true) @PathVariable("productId") String productId) {
+    public ResponseEntity<Void> productoProductIdDelete(
+            @ApiParam(value = "eliminar producto", required = true) @PathVariable("productId") String productId) {
         String accept = request.getHeader("Accept");
 
         productService.eliminarProducto(Integer.parseInt(productId));
@@ -92,10 +86,12 @@ public class ProductoApiController implements ProductoApi {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    public ResponseEntity<ProductoDTO> productoProductIdPut(@ApiParam(value = "cambiar o actualizar producto por id", required = true) @PathVariable("productId") String productId, @ApiParam(value = "producto a actualizar") @Valid @RequestBody ProductoDTO productoDTO) {
+    public ResponseEntity<ProductoDTO> productoProductIdPut(
+            @ApiParam(value = "cambiar o actualizar producto por id", required = true) @PathVariable("productId") String productId,
+            @ApiParam(value = "producto a actualizar") @Valid @RequestBody ProductoDTO producto) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            productService.modificarProducto(Integer.parseInt(productId), productoDTO);
+            productService.modificarProducto(Integer.parseInt(productId), producto);
             return new ResponseEntity(HttpStatus.OK);
 
         }

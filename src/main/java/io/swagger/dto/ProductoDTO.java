@@ -1,6 +1,7 @@
 package io.swagger.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +16,6 @@ import java.util.Objects;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
-
 
 public class ProductoDTO {
     @JsonProperty("id")
@@ -109,11 +109,11 @@ public class ProductoDTO {
      **/
     @ApiModelProperty(value = "")
 
-
     public Long getId() {
         return id;
     }
 
+    @JsonIgnore
     public void setId(Long id) {
         this.id = id;
     }
@@ -129,7 +129,6 @@ public class ProductoDTO {
      * @return nombre
      **/
     @ApiModelProperty(value = "")
-
 
     public String getNombre() {
         return nombre;
@@ -150,7 +149,6 @@ public class ProductoDTO {
      * @return categoria
      **/
     @ApiModelProperty(value = "")
-
 
     public CategoriaEnum getCategoria() {
         return categoria;
@@ -194,7 +192,6 @@ public class ProductoDTO {
      **/
     @ApiModelProperty(value = "Disponibilidad de productos")
 
-
     public DisponibilidadEnum getDisponibilidad() {
         return disponibilidad;
     }
@@ -202,7 +199,6 @@ public class ProductoDTO {
     public void setDisponibilidad(DisponibilidadEnum disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
-
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -250,4 +246,3 @@ public class ProductoDTO {
         return o.toString().replace("\n", "\n    ");
     }
 }
-

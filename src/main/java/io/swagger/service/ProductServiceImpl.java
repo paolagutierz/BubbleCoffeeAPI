@@ -7,6 +7,7 @@ import io.swagger.repository.entity.ProductoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,8 +44,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductoDTO> obtenerProductosPorCategoria(String categoria) {
-        List<ProductoEntity> productos = repo.findByCategoria(categoria);
+    public List<ProductoDTO> obtenerProductosPorCategoria(List<String> categorias) {
+        List<ProductoEntity> productos = new ArrayList<>();
+        for(String categoria:categorias ){
+            List<ProductoEntity> productosPorCategoria= repo.findByCategoria(categoria);
+            productos.addAll(productosPorCategoria);
+        }
         return mapper.entityListToDtoList(productos);
     }
 

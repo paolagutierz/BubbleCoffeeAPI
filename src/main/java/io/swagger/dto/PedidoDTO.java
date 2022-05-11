@@ -1,6 +1,7 @@
 package io.swagger.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
@@ -19,7 +20,6 @@ import java.util.Objects;
 @ApiModel(description = "pedido.")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
-
 
 public class PedidoDTO {
     @JsonProperty("id")
@@ -85,11 +85,11 @@ public class PedidoDTO {
      **/
     @ApiModelProperty(value = "")
 
-
     public String getId() {
         return id;
     }
 
+    @JsonIgnore
     public void setId(String id) {
         this.id = id;
     }
@@ -158,7 +158,6 @@ public class PedidoDTO {
      **/
     @ApiModelProperty(value = "")
 
-
     public EstadoEnum getEstado() {
         return estado;
     }
@@ -179,7 +178,6 @@ public class PedidoDTO {
      **/
     @ApiModelProperty(value = "")
 
-
     public String getFecha() {
         return fecha;
     }
@@ -187,7 +185,6 @@ public class PedidoDTO {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -235,4 +232,3 @@ public class PedidoDTO {
         return o.toString().replace("\n", "\n    ");
     }
 }
-
