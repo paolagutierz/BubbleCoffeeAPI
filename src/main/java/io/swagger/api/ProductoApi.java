@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping(value = "/paolagutierz/BubbleCoffee/2.0.0")
 public interface ProductoApi {
 
-    @ApiOperation(value = "Agregar nuevo producto al Menu", nickname = "createProduct", notes = "Añadir producto al menu por medio de formulario", response = ProductoDTO.class, tags={ "Producto", })
+    @ApiOperation(value = "Agregar nuevo producto al Menu", nickname = "createProduct", notes = "Añadir producto al menu", response = ProductoDTO.class, tags={ "Producto", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "operacion exitosa", response = ProductoDTO.class),
         @ApiResponse(code = 405, message = "Entrada no valida") })

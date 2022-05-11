@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * pedido.
  */
-@ApiModel(description = "pedido.")
+@ApiModel(description = "pedido")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-04T19:53:55.066Z")
 

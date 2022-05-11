@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-11T02:16:01.140Z")
 
@@ -41,20 +42,16 @@ public class PedidoApiController implements PedidoApi {
         this.pedidoService = pedidoService;
     }
 
-    public ResponseEntity<PedidoDTO> pedidoDetallePedidoIdGet(
-            @ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId) {
+    public ResponseEntity<PedidoDTO> verEstadoDePedido(
+    @NotNull @ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId, List<String>estados) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class),
-                        HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            List<PedidoDTO> pedidos = pedidoService.verEstadoDePedido(estados);
+
+            return new ResponseEntity(pedidos, HttpStatus.OK);
         }
 
-        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<PagoDTO> PagoPost(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pagar pedido") @Valid @RequestBody PagoDTO pagoDTO) {
@@ -68,48 +65,35 @@ public class PedidoApiController implements PedidoApi {
 
     public ResponseEntity<PedidoDTO> pedidoPedidoIdDelete(
             @ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class),
-                        HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            String accept = request.getHeader("Accept");
+
+            pedidoService.eliminarPedido(Integer.parseInt(pedidoId));
+
+            return new ResponseEntity(HttpStatus.OK);
         }
 
-        return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
-    }
 
     public ResponseEntity<PedidoDTO> pedidoPedidoIdGet(
             @ApiParam(value = "buscar pedido por id", required = true) @PathVariable("pedidoId") String pedidoId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class),
-                        HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            PedidoDTO pedido = pedidoService.obtenerPedidoPorId(Integer.parseInt(pedidoId));
+
+            return new ResponseEntity(pedido, HttpStatus.OK);
         }
 
         return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);
     }
+
 
     public ResponseEntity<PedidoDTO> pedidoPedidoIdPut(
             @ApiParam(value = "cambiar o actualizar pedido por id", required = true) @PathVariable("pedidoId") String pedidoId,
             @ApiParam(value = "pedido a actualizar") @Valid @RequestBody PedidoDTO pedido) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<PedidoDTO>(objectMapper.readValue("{\"empty\": false}", PedidoDTO.class),
-                        HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<PedidoDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            pedidoService.modificarPedido(Integer.parseInt(pedidoId), (List<Integer>) pedido);
+            return new ResponseEntity(HttpStatus.OK);
+
         }
 
         return new ResponseEntity<PedidoDTO>(HttpStatus.NOT_IMPLEMENTED);

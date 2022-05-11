@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-11T02:16:01.140Z")
 
@@ -25,15 +26,15 @@ import java.util.ArrayList;
 @RequestMapping(value = "/paolagutierz/BubbleCoffee/2.0.0")
 public interface PedidoApi {
 
-    @ApiOperation(value = "Obtener detalle del pedido pendiente por pagar", nickname = "pedidoDetallePedidoIdGet", notes = "detalle de pedido pagado.", response = PedidoDTO.class, tags = {
+    @ApiOperation(value = "Obtener detalle del pedido pendiente por pagar", nickname = "verEstadoDePedido", notes = "detalle de pedido pagado.", response = PedidoDTO.class, tags = {
             "Pedido", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "pedido encontrado", response = PedidoDTO.class),
             @ApiResponse(code = 400, message = "entrada incorrecta"),
             @ApiResponse(code = 404, message = "pedido no encontrado") })
     @RequestMapping(value = "/pedido/detalle/{pedidoId}", produces = { "application/json" }, method = RequestMethod.GET)
-    ResponseEntity<PedidoDTO> pedidoDetallePedidoIdGet(
-            @ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId);
+    ResponseEntity<PedidoDTO> verEstadoDePedido(
+            @ApiParam(value = "ver detalle de pedido para producirlo", required = true) @PathVariable("pedidoId") String pedidoId,  List<String> estados);
 
     @ApiOperation(value = "Pagar pedido", nickname = "PagoPost", notes = "obtener el pedido por Id para pagarlo", response = PedidoDTO.class, tags = {
             "Pedido", })
