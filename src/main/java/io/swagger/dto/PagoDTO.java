@@ -1,5 +1,6 @@
 package io.swagger.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -49,7 +50,7 @@ public class PagoDTO {
      **/
     @ApiModelProperty(value = "")
 
-
+    @JsonIgnore
     public String getId() {
         return id;
     }
@@ -117,6 +118,7 @@ public class PagoDTO {
 
 
     public String getCardNum() {
+
         return cardNum;
     }
 
@@ -125,6 +127,7 @@ public class PagoDTO {
     }
 
     public PagoDTO expires(String expires) {
+
         this.expires = expires;
         return this;
     }
