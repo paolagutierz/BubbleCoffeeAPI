@@ -16,15 +16,6 @@ public class PagoEntity {
     @Column(name = "nomCliente")
     private String nomCliente;
 
-    @Column(name = "cardNum")
-    private double cardNum;
-
-    @Column(name = "expires")
-    private String expires;
-
-    @Column(name = "costo")
-    private double costo;
-
     public Integer getId() {
         return id;
     }
@@ -49,27 +40,4 @@ public class PagoEntity {
         this.nomCliente = nomCliente;
     }
 
-    public double getCardNum() {
-        return cardNum;
-    }
-
-    public void setCardNum(double cardNum) {
-        this.cardNum = cardNum;
-    }
-
-    public String getExpires() {
-        return expires;
-    }
-
-    public void setExpires(String expires) {
-        this.expires = expires;
-    }
-
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
 }

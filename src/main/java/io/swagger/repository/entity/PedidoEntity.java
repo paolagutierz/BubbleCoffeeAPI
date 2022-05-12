@@ -10,8 +10,9 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ProductoEntity> productos;
+    @OneToMany(mappedBy="pedidoEntity",cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<PedidoDetalleEntity> pedidoDetalleList;
 
     @Column(name = "costoTotal")
     private double costoTotal;
@@ -30,12 +31,12 @@ public class PedidoEntity {
         this.id = id;
     }
 
-    public List<ProductoEntity> getProductos() {
-        return productos;
+    public List<PedidoDetalleEntity> getPedidoDetalleList() {
+        return pedidoDetalleList;
     }
 
-    public void setProductos(List<ProductoEntity> productoDTOS) {
-        this.productos = productoDTOS;
+    public void setPedidoDetalleList(List<PedidoDetalleEntity> pedidoDetalleList) {
+        this.pedidoDetalleList = pedidoDetalleList;
     }
 
     public double getCostoTotal() {

@@ -12,11 +12,4 @@ public interface PedidoService {
 
     PedidoDTO obtenerPedidoPorId(int id);
 
-    PedidoDTO modificarPedido(int id, List<Integer>productos);
-
-    List<PedidoDTO>verEstadoDePedido(List<String> id);
-
-
-
-
 }

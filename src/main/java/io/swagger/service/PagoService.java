@@ -4,5 +4,5 @@ import io.swagger.dto.PagoDTO;
 
 public interface PagoService {
 
-    PagoDTO crearPago(PagoDTO pagoDTO);
+    PagoDTO crearPago(int id, PagoDTO pagoDTO);
 }

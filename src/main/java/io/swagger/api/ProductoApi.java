@@ -59,7 +59,6 @@ public interface ProductoApi {
         @ApiResponse(code = 200, message = "pedido eliminado"),
         @ApiResponse(code = 404, message = "no encontrado") })
     @RequestMapping(value = "/producto/{productId}",
-        consumes = { "application/json" },
         method = RequestMethod.DELETE)
     ResponseEntity<Void> productoProductIdDelete(@ApiParam(value = "eliminar producto",required=true) @PathVariable("productId") String productId);
 

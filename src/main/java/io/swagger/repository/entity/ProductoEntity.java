@@ -1,6 +1,7 @@
 package io.swagger.repository.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -9,6 +10,12 @@ public class ProductoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToMany(mappedBy="productoEntity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+             fetch=FetchType.LAZY)
+    private List<PedidoDetalleEntity> pedidoDetalleList;
 
     @Column(name = "nombre")
     private String nombre;
@@ -60,5 +67,13 @@ public class ProductoEntity {
 
     public void setDisponibilidad(String disponibilidad) {
         this.disponibilidad = disponibilidad;
+    }
+
+    public List<PedidoDetalleEntity> getPedidoDetalleList() {
+        return pedidoDetalleList;
+    }
+
+    public void setPedidoDetalleList(List<PedidoDetalleEntity> pedidoDetalleList) {
+        this.pedidoDetalleList = pedidoDetalleList;
     }
 }
