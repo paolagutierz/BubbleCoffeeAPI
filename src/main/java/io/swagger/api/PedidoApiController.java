@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2022-05-11T02:16:01.140Z")
 
@@ -44,7 +43,7 @@ public class PedidoApiController implements PedidoApi {
     }
 
 
-    public ResponseEntity<PagoDTO> PagoPost(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pagar pedido") @Valid @RequestBody PagoDTO pagoDTO) {
+    public ResponseEntity<PagoDTO> pagoPost(@ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId, @ApiParam(value = "pagar pedido") @Valid @RequestBody PagoDTO pagoDTO) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             PagoDTO pago = pagoService.crearPago(Integer.parseInt(pedidoId), pagoDTO);

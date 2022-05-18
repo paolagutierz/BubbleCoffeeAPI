@@ -25,7 +25,7 @@ import java.util.ArrayList;
 @RequestMapping(value = "/paolagutierz/BubbleCoffee/2.0.0")
 public interface PedidoApi {
 
-    @ApiOperation(value = "Pagar pedido", nickname = "PagoPost", notes = "obtener el pedido por Id para pagarlo", response = PedidoDTO.class, tags = {
+    @ApiOperation(value = "Pagar pedido", nickname = "pagoPost", notes = "obtener el pedido por Id para pagarlo", response = PedidoDTO.class, tags = {
             "Pedido", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Pedido pagado", response = PedidoDTO.class),
@@ -33,7 +33,7 @@ public interface PedidoApi {
             @ApiResponse(code = 409, message = "pago duplicado") })
     @RequestMapping(value = "/pedido/pago/{pedidoId}", produces = { "application/json" }, consumes = {
             "application/json" }, method = RequestMethod.POST)
-    ResponseEntity<PagoDTO> PagoPost(
+    ResponseEntity<PagoDTO> pagoPost(
             @ApiParam(value = "pedido id", required = true) @PathVariable("pedidoId") String pedidoId,
             @ApiParam(value = "pagar pedido") @Valid @RequestBody PagoDTO pagoDTO);
 
